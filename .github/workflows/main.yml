@@ -11,9 +11,21 @@ on:
 jobs:
     cypress-run:
         runs-on: ubuntu-24.04
+        services:
+            mongodb:
+              image: mongo:latest
+              ports: 
+                - 27017:27017
+              options: >-
+                --health-cmd="mongosh --eval 'db.runCommand({ ping: 1 })'"
+                --health-interval=10s
+                --health-timeout=5s
+                --health-retries=5
         steps:
           - name: Checkout
             uses: actions/checkout@v4
+          - name: Install dependencies
+            run: npm ci
           # Install npm dependencies, cache them correctly
           # and run all Cypress tests
           - name: Cypress run
@@ -22,4 +34,9 @@ jobs:
               build: npm run build
               start: npm start
               wait-on: 'http://localhost:3001/'
-              browser: electron 
+              browser: electron
+            
+            #   - name: Run Cypress Component Tests
+            #   uses: cypress-io/github-action@v6
+            #   with:
+            #     component: true
