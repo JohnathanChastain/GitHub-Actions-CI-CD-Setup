@@ -34,4 +34,9 @@ jobs:
               build: npm run build
               start: npm start
               wait-on: 'http://localhost:3001/'
-              browser: electron 
+              browser: electron
+            
+            #   - name: Run Cypress Component Tests
+            #   uses: cypress-io/github-action@v6
+            #   with:
+            #     component: true
