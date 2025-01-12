@@ -1,0 +1,25 @@
+# Name of workflow
+name: Test workflow
+
+# Trigger workflow on all pull requests
+on:
+  pull_request:
+    branches:
+      - develop
+
+# Jobs to carry out
+jobs:
+    cypress-run:
+        runs-on: ubuntu-24.04
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v4
+          # Install npm dependencies, cache them correctly
+          # and run all Cypress tests
+          - name: Cypress run
+            uses: cypress-io/github-action@v6
+            with:
+              build: npm run build
+              start: npm start
+              wait-on: 'http://localhost:3001/'
+              browser: electron 
