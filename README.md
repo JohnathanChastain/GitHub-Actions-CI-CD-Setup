@@ -132,7 +132,6 @@ This Challenge is graded based on the following criteria:
 
 ## Review
 
-'this is for testing'
 
 You are required to submit BOTH of the following for review:
 
